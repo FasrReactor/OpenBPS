@@ -262,6 +262,14 @@ public:
     //! Form a real decay nuclide matrix
     //!
     //!\param[in] chain with decay information and fill the data storage
+    //!\param[in] material with nuclear concentration
+    //!\return result a matrix with all transition for the material
+    xt::xarray<double> get_matrix_real(Chain& chain,
+                                  const Materials& mat, std::string matrix_kind);
+    //! Methods
+    //! Form a real decay nuclide matrix
+    //!
+    //!\param[in] chain with decay information and fill the data storage
     void form_matrixreal(Chain& chain);
     //! Form a deviation decay nuclide matrix for unceratanties analysis
     //!
@@ -315,6 +323,16 @@ public:
     //!\return result a vector with all transition for every nuclide:Dev
     xt::xarray<double> dsigp(Chain& chain,
                              const Materials& mat);
+    //! Utility for functions sigp(...) and dsigp(...)
+    //!
+    //!\param[in] chain with decay information and fill the data storage
+    //!\param[in] material with nuclear concentration
+    //!\param[in] boolean var (true for dsigp, false for sigps)
+    //!\return result a vector with all transition for every
+    //!nuclide:Dev in case of d == true nuclide:Real in case d == false    
+    xt::xarray<double> formSigp(Chain& chain,
+                                      const Materials& mat,
+                                      bool d);
 
 }; //class IterMatrix
 
